@@ -32,7 +32,3 @@
             generateValue: true
           - key: APP_KEYS
             generateValue: true
-
-    databases:
-      - name: strapi
-        plan: free # This database will expire 90 days after creation
