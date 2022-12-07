@@ -1,51 +1,38 @@
-services:
-  - type: web
-    name: strapi
-    env: node
-    plan: starter
-    buildCommand: yarn install && yarn build
-    startCommand: yarn start
-    healthCheckPath: /_health
-    envVars:
-      - key: NODE_VERSION
-        value: ~16.13.0
-      - key: NODE_ENV
-        value: production
-      - key: CLOUDINARY_NAME
-        sync: false
-      - key: CLOUDINARY_KEY
-        sync: false
-      - key: CLOUDINARY_SECRET
-        sync: false
-      - key: DATABASE_URL
-        fromDatabase:
-          name: strapi
-          property: connectionString
-      - key: JWT_SECRET
-        generateValue: true
-      - key: ADMIN_JWT_SECRET
-        generateValue: true
-      - key: APP_KEYS
-        generateValue: true
-      - key: API_TOKEN_SALT
-        generateValue: true
-
-  - type: web
-        name: productivity-tips-web
+    services:
+      - type: web
+        name: productivity-tips-api
         env: node
         plan: free
-        # Update the following line with your Remix GitHub repo
-        repo: https://github.com/render-examples/strapiconf2022-workshop-remix
-        branch: step-5
-        buildCommand: npm install && npm run build
-        startCommand: npm start
+        # Update the following line with your Strapi GitHub repo
+        repo: https://github.com/codigoconjuan/GuitarLA-Strapi
+        branch: main
+        buildCommand: yarn install && yarn build
+        startCommand: yarn start
+        healthCheckPath: /_health
         envVars:
-          - key: STRAPI_URL_BASE
-            fromService:
-              type: web
-              name: productivity-tips-api
-              envVarKey: RENDER_EXTERNAL_URL
-    
+          - key: NODE_VERSION
+            value: ~16.13.0
+          - key: NODE_ENV
+            value: production
+          - key: CLOUDINARY_NAME
+            sync: false
+          - key: CLOUDINARY_KEY
+            sync: false
+          - key: CLOUDINARY_SECRET
+            sync: false
+          - key: DATABASE_URL
+            fromDatabase:
+              name: strapi
+              property: connectionString
+          - key: JWT_SECRET
+            generateValue: true
+          - key: ADMIN_JWT_SECRET
+            generateValue: true
+          - key: API_TOKEN_SALT
+            generateValue: true
+          - key: APP_KEYS
+            generateValue: true
+
     databases:
       - name: strapi
         plan: free # This database will expire 90 days after creation
